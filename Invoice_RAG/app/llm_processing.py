@@ -1,6 +1,8 @@
 from models.rag_service import index_pdf, search_image
 from models.vl_model import load_model, run_answer
 import json, re
+from app.schema import KVResult, InvoiceSchema
+
 
 model, tokenizer = load_model()
 
@@ -92,6 +94,7 @@ def Process_Invoice(pdf_path: str) -> dict:
         try:
             image = search_image(RAG, q["question"])
             result_text = run_answer(model, tokenizer, q["question"], image)
+            print(result_text)
             extracted = extract_json(result_text)
             if isinstance(extracted, dict) and q["key"] in extracted:
                 val = extracted[q["key"]]
@@ -105,5 +108,14 @@ def Process_Invoice(pdf_path: str) -> dict:
                 result_json[q["key"]] = extracted
         except Exception as e:
             result_json[q["key"]] = f"Error: {str(e)}"
-
+    print(result_json)
+    """
+    return InvoiceSchema(
+        Header=result_json.Header,
+        Main_Table=kv_result.Main_Table,
+        Payment_Terms=kv_result.Payment_Terms,
+        Summary=kv_result.Summary,
+        Other_Important_Sections=kv_result.Other_Important_Sections,
+    ).model_dump()
+    """
     return result_json
