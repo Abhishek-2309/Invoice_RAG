@@ -3,7 +3,7 @@ from typing import List, Dict, Any, Optional
 
 class PartyInfo(BaseModel):
     model_config = ConfigDict(extra='allow')
-    Company_Name: Optional[str] = Field(None, alias="Company Name")
+    Name: Optional[str] = Field(None, alias="Company Name")
     Address: Optional[str] = None
     Contact: Optional[str] = None
     GSTIN: Optional[str] = None
