@@ -110,14 +110,16 @@ def Process_Invoice(pdf_path: str) -> dict:
                     result_json[q["key"]] = val
             else:
                 if q["key"] in ["Invoice_Number", "Invoice_Date", "Buyer's_Information", "Seller's_Information"]:
-                    header[q['key']] = extracted
+                    header[q["key"]] = extracted
                 else:
                     result_json[q["key"]] = extracted
         except Exception as e:
             result_json[q["key"]] = f"Error: {str(e)}"
             
-    print(header, result_json)
-    print(result_json['Main_Table'], result_json['Payment_Terms'], result_json['Summary'], result_json['Other_Important_Sections'])
+    print(header)
+    print("RESULT_JSON", result_json)
+    
+    print(result_json["Main_Table"], result_json["Payment_Terms"], result_json["Summary"], result_json["Other_Important_Sections"])
     return InvoiceSchema(
         Header= header,
         Main_Table= result_json['Main_Table'],
