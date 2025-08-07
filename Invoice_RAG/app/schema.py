@@ -5,13 +5,13 @@ class PartyInfo(BaseModel):
     model_config = ConfigDict(extra='allow')
     Name: Optional[str] = Field(None, alias="Company Name")
     Address: Optional[str] = None
-    Contact: Optional[str] = None
-    GSTIN: Optional[str] = None
+    Contact: Optional[Union[str, float, int]] = None
+    GSTIN: Optional[Union[str, float, int]] = None
 
 
 class HeaderSection(BaseModel):
     model_config = ConfigDict(extra='allow')
-    Unique_Invoice_Number: Optional[str] = Field(None, alias="Invoice_Number")
+    Unique_Invoice_Number: Optional[Union[str, float, int]] = Field(None, alias="Invoice_Number")
     Invoice_Date: Optional[str] = Field(None, alias="Invoice_Date")
     Seller_Info: Optional[PartyInfo] = Field(None, alias="Seller's_Information")
     Buyer_Info: Optional[PartyInfo] = Field(None, alias="Buyer's_Information")
@@ -26,10 +26,10 @@ class PaymentTerms(BaseModel):
 
 class SummarySection(BaseModel):
     model_config = ConfigDict(extra='allow')
-    Subtotal: Optional[str] = None
-    Taxes: Optional[str] = None
-    Discounts: Optional[str] = None
-    Total_Amount_Due: Optional[str] = Field(None, alias="Total Amount Due")
+    Subtotal: Optional[Union[str, float, int]] = None
+    Taxes: Optional[Union[str, float, int]] = None
+    Discounts: Optional[Union[str, float, int]] = None
+    Total_Amount_Due: Optional[Union[str, float, int]] = Field(None, alias="Total Amount Due")
 
 
 class OtherImportantSections(BaseModel):
