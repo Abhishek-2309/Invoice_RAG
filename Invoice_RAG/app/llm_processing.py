@@ -45,11 +45,11 @@ Output format:
     Bank_details, consisting of: Bank_Name, IFSC_Code, Bank_account_no
     Payment Due Date,
     Payment Methods
-    Output should be in JSON format with the key as 'Payment Terms' and values as the above details """},
+    Output should be in JSON format with the key as 'Payment Terms' and values as the above details"""},
     
     {"key": "Summary", "question": """Identify The following summary details:
-    Subtotal(Total amount of goods before taxes), Taxes, Discounts, Total_Amount_Due(Total amount due including Taxes)
-    Output should be in JSON format with the key as 'Summary' and values as the above details. """},   
+    Subtotal(Total amount of goods before taxes), Taxes(Total value of all taxes in the total amount), Discounts, Total_Amount_Due(Total amount due including Taxes)
+    Output should be in JSON format with the key as 'Summary' and values as the above details in string format of their value and currency symbol"""},   
     
     {"key": "Other_Important_Sections", "question": """Identify The following details:
     Terms and conditions, Notes/Comments, Signature.
