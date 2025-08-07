@@ -87,6 +87,7 @@ def extract_json(text: str):
         return json_str  
 
 def Process_Invoice(pdf_path: str) -> dict:
+    print("Processing", pdf_path)
     RAG = index_pdf(pdf_path)
     result_json = {}
 
