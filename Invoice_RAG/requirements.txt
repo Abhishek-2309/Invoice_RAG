@@ -18,4 +18,5 @@ byaldi
 Pillow
 
 pydantic
+poppler
 python-multipart
