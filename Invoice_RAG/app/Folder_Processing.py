@@ -31,7 +31,7 @@ def process_zip(zip_file: UploadFile, output_dir: str) -> Dict[str, dict]:
 
                 try:
                     if ext in [".jpg", ".jpeg", ".png", ".tiff", ".bmp", '.pdf']:
-                        result = Process_Invoice(full_path)        
+                        output = Process_Invoice(full_path)        
                     else:
                         output = {"error": f"Unsupported file type: {ext}"}
 
