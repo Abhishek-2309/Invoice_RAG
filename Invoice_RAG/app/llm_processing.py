@@ -12,15 +12,16 @@ Invoice_queries = [
     {"key": "Invoice_Date", "question": "Find the Invoice Date in the image. Return in json with the key as 'Invoice_Date' and its value wihin quotes "},
 
     {"key": "Buyer's_Information", "question": """Identify the Buyer and extract the following buyer details:
-    Name(either Buyer or Company), Address, Contact, GSTIN(GSTIN Number of Buyer's company)
-    Output should be in JSON format with the key as 'Buyer's_Information' and values as the above details. """},
+    Name(either Buyer or Company), Address, Contact, GSTIN(The unique GSTIN Number of Buyer's company)
+    Output should be in JSON format with the key as 'Buyer's_Information' and values as the above details. If any value is missing, leave empty. """},
 
     {"key": "Seller's_Information", "question": """Identify the Seller and extract the following seller details:
-    Name(either seller or Company), Address, Contact, GSTIN(GSTIN Number of Seller's company)
-    Output should be in JSON format with the key as 'Seller's_Information' and values as the above details. """},
+    Name(either seller or Company), Address, Contact, GSTIN(The unique GSTIN Number of Seller's company)
+    Output should be in JSON format with the key as 'Seller's_Information' and values as the above details. If any value is missing, leave empty """},
 
     {"key": "Main_Table", "question": """From the provided image of the invoice document, extract the **entire main line-item table** which lists individual products or services that are invoiced.
 Instructions:
+- Extract only from the main invoice table which usually has fields related to Description, Quantity, Code etc. of a product
 - Only extract the itemized list of products or services (do not include totals, subtotals or summary rows).
 - Each row must include all relevant fields such as description, quantity, rate, amount, etc.
 - Do not omit any rows. The output must cover **all rows in the table**.
@@ -45,10 +46,10 @@ Output format:
     Bank_details, consisting of: Bank_Name, IFSC_Code, Bank_account_no
     Payment Due Date,
     Payment Methods
-    Output should be in JSON format with the key as 'Payment Terms' and values as the above details"""},
+    Output should be in JSON format with the key as 'Payment Terms' and values as the above details. If any value is missing, leave empty"""},
     
     {"key": "Summary", "question": """Identify The following summary details:
-    Subtotal(Total amount of goods before taxes), Taxes(Total value of all taxes in the total amount), Discounts, Total_Amount_Due(Total amount due including Taxes)
+    Subtotal(Total amount of goods before taxes), Taxes(Total value of all taxes added to the subtotal of line items to make up the total amount), Discounts, Total_Amount_Due(Total amount due including Taxes)
     Output should be in JSON format with the key as 'Summary' and values as the above details in string format of their value"""},   
     
     {"key": "Other_Important_Sections", "question": """Identify The following details:
