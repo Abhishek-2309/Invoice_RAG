@@ -11,10 +11,10 @@ class PartyInfo(BaseModel):
 
 class HeaderSection(BaseModel):
     model_config = ConfigDict(extra='allow')
-    Unique_Invoice_Number: Optional[str] = Field(None, alias="Invoice Number")
-    Invoice_Date: Optional[str] = Field(None, alias="Invoice Date")
-    Seller_Info: Optional[PartyInfo] = Field(None, alias="Seller's Information")
-    Buyer_Info: Optional[PartyInfo] = Field(None, alias="Buyer's Information")
+    Unique_Invoice_Number: Optional[str] = Field(None, alias="Invoice_Number")
+    Invoice_Date: Optional[str] = Field(None, alias="Invoice_Date")
+    Seller_Info: Optional[PartyInfo] = Field(None, alias="Seller's_Information")
+    Buyer_Info: Optional[PartyInfo] = Field(None, alias="Buyer's_Information")
 
 
 class PaymentTerms(BaseModel):
