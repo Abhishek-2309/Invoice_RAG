@@ -24,6 +24,7 @@ def process_zip(zip_file: UploadFile, output_dir: str) -> Dict[str, dict]:
             for fname in files:
                 print(fname)
                 full_path = os.path.join(root, fname)
+                print(full_path)
                 name, ext = os.path.splitext(fname)
                 ext = ext.lower()
                 output = {}
