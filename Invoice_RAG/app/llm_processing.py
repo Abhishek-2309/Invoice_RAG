@@ -117,12 +117,12 @@ def Process_Invoice(pdf_path: str) -> dict:
             result_json[q["key"]] = f"Error: {str(e)}"
             
     print(header, result_json)
-    
+    print(result_json['Main_Table'], result_json['Payment_Terms'], result_json['Summary'], result_json['Other_Important_Sections'])
     return InvoiceSchema(
         Header= header,
-        Main_Table= result_json.Main_Table,
-        Payment_Terms= result_json.Payment_Terms,
-        Summary= result_json.Summary,
-        Other_Important_Sections= result_json.Other_Important_Sections,
+        Main_Table= result_json['Main_Table'],
+        Payment_Terms= result_json['Payment_Terms'],
+        Summary= result_json['Summary'],
+        Other_Important_Sections= result_json['Other_Important_Sections'],
     ).model_dump()
     
