@@ -3,6 +3,7 @@ import base64, io
 from PIL import Image
 
 def index_pdf(path: str):
+    print("index_pdf", path)
     RAG = RAGMultiModalModel.from_pretrained("vidore/colqwen2-v1.0", verbose=0)
     
     RAG.index(
