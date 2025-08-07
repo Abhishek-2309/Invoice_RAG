@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Union
 
 class PartyInfo(BaseModel):
     model_config = ConfigDict(extra='allow')
