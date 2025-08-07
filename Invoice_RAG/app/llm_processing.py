@@ -7,17 +7,17 @@ from app.schema import KVResult, InvoiceSchema
 model, tokenizer = load_model()
 
 Invoice_queries = [
-    {"key": "Invoice_Number", "question": "Find the Invoice Number in the image. Return in json with the key as 'Invoice Number' "},
+    {"key": "Invoice_Number", "question": "Find the Invoice Number in the image. Return in json with the key as 'Invoice_Number' "},
 
-    {"key": "Invoice_Date", "question": "Find the Invoice Date in the image. Return in json with the key as 'Invoice Date' "},
+    {"key": "Invoice_Date", "question": "Find the Invoice Date in the image. Return in json with the key as 'Invoice_Date' "},
 
     {"key": "Buyer's_Information", "question": """Identify the Buyer and extract the following buyer details:
     Name(either Buyer or Company), Address, Contact, GSTIN(GSTIN Number of Buyer's company)
-    Output should be in JSON format with the key as 'Buyer's Information' and values as the above details. """},
+    Output should be in JSON format with the key as 'Buyer's_Information' and values as the above details. """},
 
     {"key": "Seller's_Information", "question": """Identify the Seller and extract the following seller details:
     Name(either seller or Company), Address, Contact, GSTIN(GSTIN Number of Seller's company)
-    Output should be in JSON format with the key as 'Seller's Information' and values as the above details. """},
+    Output should be in JSON format with the key as 'Seller's_Information' and values as the above details. """},
 
     {"key": "Main_Table", "question": """From the provided image of the invoice document, extract the **entire main line-item table** which lists individual products or services that are invoiced.
 Instructions:
@@ -49,7 +49,7 @@ Output format:
     
     {"key": "Summary", "question": """Identify The following summary details:
     Subtotal(Total amount of goods before taxes), Taxes(Total value of all taxes in the total amount), Discounts, Total_Amount_Due(Total amount due including Taxes)
-    Output should be in JSON format with the key as 'Summary' and values as the above details in string format of their value and currency symbol"""},   
+    Output should be in JSON format with the key as 'Summary' and values as the above details in string format of their value"""},   
     
     {"key": "Other_Important_Sections", "question": """Identify The following details:
     Terms and conditions, Notes/Comments, Signature.
