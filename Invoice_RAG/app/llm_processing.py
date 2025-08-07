@@ -7,19 +7,19 @@ from app.schema import KVResult, InvoiceSchema
 model, tokenizer = load_model()
 
 Invoice_queries = [
-    {"key": "Invoice Number", "question": "Find the Invoice Number in the image. Return in json with the key as 'Invoice Number' "},
+    {"key": "Invoice_Number", "question": "Find the Invoice Number in the image. Return in json with the key as 'Invoice Number' "},
 
-    {"key": "Invoice Date", "question": "Find the Invoice Date in the image. Return in json with the key as 'Invoice Date' "},
+    {"key": "Invoice_Date", "question": "Find the Invoice Date in the image. Return in json with the key as 'Invoice Date' "},
 
-    {"key": "Buyer's Information", "question": """Identify the Buyer and extract the following buyer details:
+    {"key": "Buyer's_Information", "question": """Identify the Buyer and extract the following buyer details:
     Name(either Buyer or Company), Address, Contact, GSTIN(GSTIN Number of Buyer's company)
     Output should be in JSON format with the key as 'Buyer's Information' and values as the above details. """},
 
-    {"key": "Seller's Information", "question": """Identify the Seller and extract the following seller details:
+    {"key": "Seller's_Information", "question": """Identify the Seller and extract the following seller details:
     Name(either seller or Company), Address, Contact, GSTIN(GSTIN Number of Seller's company)
     Output should be in JSON format with the key as 'Seller's Information' and values as the above details. """},
 
-    {"key": "Main Table", "question": """From the provided image of the invoice document, extract the **entire main line-item table** which lists individual products or services that are invoiced.
+    {"key": "Main_Table", "question": """From the provided image of the invoice document, extract the **entire main line-item table** which lists individual products or services that are invoiced.
 Instructions:
 - Only extract the itemized list of products or services (do not include totals, subtotals or summary rows).
 - Each row must include all relevant fields such as description, quantity, rate, amount, etc.
@@ -41,7 +41,7 @@ Output format:
 """
 },
 
-    {"key": "Payment Terms", "question": """Identify the following Payment terms from the given image:
+    {"key": "Payment_Terms", "question": """Identify the following Payment terms from the given image:
     Bank_details, consisting of: Bank_Name, IFSC_Code, Bank_account_no
     Payment Due Date,
     Payment Methods
@@ -90,7 +90,7 @@ def Process_Invoice(pdf_path: str) -> dict:
     print("Processing", pdf_path)
     RAG = index_pdf(pdf_path)
     result_json = {}
-
+    header = {}
     for q in Invoice_queries:
         try:
             image = search_image(RAG, q["question"])
@@ -104,19 +104,21 @@ def Process_Invoice(pdf_path: str) -> dict:
                         val = json.loads(val)
                     except json.JSONDecodeError:
                         pass
-                result_json[q["key"]] = val
+                if q["key"] in ["Invoice_Number", "Invoice_Date", "Buyer's_Information", "Seller's_Information"]:
+                    header[q['key']] = val
+                else:
+                    result_json[q["key"]] = val
             else:
                 result_json[q["key"]] = extracted
         except Exception as e:
             result_json[q["key"]] = f"Error: {str(e)}"
     print(result_json)
-    """
+    
     return InvoiceSchema(
-        Header=result_json.Header,
-        Main_Table=kv_result.Main_Table,
-        Payment_Terms=kv_result.Payment_Terms,
-        Summary=kv_result.Summary,
-        Other_Important_Sections=kv_result.Other_Important_Sections,
+        Header= header,
+        Main_Table= result_json.Main_Table,
+        Payment_Terms= result_json.Payment_Terms,
+        Summary= result_json.Summary,
+        Other_Important_Sections= result_json.Other_Important_Sections,
     ).model_dump()
-    """
-    return result_json
+    
