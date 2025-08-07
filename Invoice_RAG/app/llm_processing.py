@@ -29,7 +29,7 @@ Instructions:
 - Double-check and confirm that the table is complete before finishing.
 Output format:
 {
-  "Items": [
+  "items": [
     {
       "Field1": "Value1",
       "Field2": "Value2",
