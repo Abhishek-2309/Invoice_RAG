@@ -7,9 +7,9 @@ from app.schema import KVResult, InvoiceSchema
 model, tokenizer = load_model()
 
 Invoice_queries = [
-    {"key": "Invoice_Number", "question": "Find the Invoice Number in the image. Return in json with the key as 'Invoice_Number' "},
+    {"key": "Invoice_Number", "question": "Find the Invoice Number in the image. Return in json with the key as 'Invoice_Number' and its value within quotes "},
 
-    {"key": "Invoice_Date", "question": "Find the Invoice Date in the image. Return in json with the key as 'Invoice_Date' "},
+    {"key": "Invoice_Date", "question": "Find the Invoice Date in the image. Return in json with the key as 'Invoice_Date' and its value wihin quotes "},
 
     {"key": "Buyer's_Information", "question": """Identify the Buyer and extract the following buyer details:
     Name(either Buyer or Company), Address, Contact, GSTIN(GSTIN Number of Buyer's company)
